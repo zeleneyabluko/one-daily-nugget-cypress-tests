@@ -1,0 +1,14 @@
+{
+  "name": "one-daily-nugget-cypress-tests",
+  "version": "1.0.0",
+  "description": "Cypress tests for One Daily Nugget website.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Svitlana Dmytrenko",
+  "license": "MIT",
+  "devDependencies": {
+    "cypress": "^13.6.6"
+  }
+}
