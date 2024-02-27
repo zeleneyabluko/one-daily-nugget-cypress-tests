@@ -4,9 +4,8 @@ describe('Home page opens successfully', () => {
   it('Home page opens successfully', () => {
     const home = new HomePage();
     home.visit();
-    })
-  it('Accepts cookies', () => {
     cy.acceptCookies();
-  })
+    })
+ 
 
 })
