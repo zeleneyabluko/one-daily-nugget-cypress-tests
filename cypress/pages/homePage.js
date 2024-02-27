@@ -3,16 +3,16 @@ export class HomePage {
         cy.visit('/');
         }
 
-    typeEmail() {
-
+    typeEmail(email) {
+        cy.get("input[type='email']").type(email);
     }
 
-    acceptPrivacyPolicy() {
-
+    togglePrivacyPolicyCheckbox() {
+        cy.get("input[type='checkbox']").click();
     }
 
     clickSubmit() {
-
+        cy.get('button').contains('Submit').click();
     }
 
     openIssueView() {
@@ -20,6 +20,7 @@ export class HomePage {
     }
 
     openPrivacyPolicy() {
+        cy.get('a').contains('Privacy policy')
 
     }
 
@@ -36,7 +37,7 @@ export class HomePage {
     }
 
     openArchive() {
-        
+
     }
 
 
