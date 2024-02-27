@@ -9,6 +9,7 @@
   "author": "Svitlana Dmytrenko",
   "license": "MIT",
   "devDependencies": {
-    "cypress": "^13.6.6"
+    "cypress": "^13.6.6",
+    "cypress-react-selector": "^3.0.0"
   }
 }
