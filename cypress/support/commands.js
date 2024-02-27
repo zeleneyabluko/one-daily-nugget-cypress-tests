@@ -23,3 +23,6 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.Commands.add('acceptCookies', () => {
+cy.get('//*[@id="__next"]/div[1]/div/div/div[1]/button').should('haveText', 'Accept').click();
+});
