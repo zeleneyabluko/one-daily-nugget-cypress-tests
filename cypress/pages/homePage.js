@@ -20,7 +20,7 @@ export class HomePage {
     }
 
     openPrivacyPolicy() {
-        cy.get('a').contains('Privacy policy')
+        cy.get('a').contains(/privacy policy/i)
 
     }
 
