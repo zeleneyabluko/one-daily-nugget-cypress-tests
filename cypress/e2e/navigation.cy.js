@@ -7,13 +7,11 @@ describe('User can navigate through the pages', () => {
   })
   
 
-  it ('Can open the issue view', () => {
+  it ('There are three issue cards on the main page', () => {
     const home = new HomePage();
-    сy.get('a')
-    .should('have.attr', 'href')
-    .then(href => expect(href).startsWith(`/issues/`).toBeTruthy);
-    })
+    cy.get(`a`)
+  .should('have.attr', 'href', '/issues/');
 
-
+  })
 
 })

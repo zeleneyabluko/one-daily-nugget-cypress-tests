@@ -1,6 +1,6 @@
 import { HomePage } from "../pages/homePage"
 
-describe('User can navigate through the site', () => {
+describe('User subscribes to One Daily Nugget emails', () => {
   beforeEach(() => {
      cy.visit('/');
     cy.acceptCookies();
@@ -28,6 +28,8 @@ describe('User can navigate through the site', () => {
     home.clickSubmit();
     cy.get('span').should('contain', 'Please agree with our Privacy Policy before proceeding');
   })
+
+
   
  
 
