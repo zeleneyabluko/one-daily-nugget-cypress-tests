@@ -6,6 +6,7 @@ describe('Home page opens successfully', () => {
     home.visit();
     cy.acceptCookies();
     })
+  
  
 
 })
