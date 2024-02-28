@@ -53,10 +53,17 @@ describe('User subscribes to One Daily Nugget emails', () => {
   it ('Can submit the email after clicking "Sign up" on the About page', () => {
     cy.openAboutPage();
     cy.get('button').contains('Sign up').click();
-    cy.typeSubscriberEmail(chance.email({domain: 'example.com'}));
-    cy.togglePrivacyPolicyCheckbox();
-    cy.submitSubscriberEmail();
+    cy.waitForReact();
+    cy.react('ModalFormWrapper').should('exist');
+    cy.react('ModalFormWrapper').find("input[type='email']").
+    type(chance.email());
+    cy.react('ModalFormWrapper').find("input[type='checkbox']").click();
+    cy.react('ModalFormWrapper').find('button').contains('Submit')
+    .click({force:true});
     cy.checkSignupSuccessPage();
+
+   
+    //cy.checkSignupSuccessPage();
 
   })
 

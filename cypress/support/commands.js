@@ -1,13 +1,13 @@
 Cypress.Commands.add('acceptCookies', () => {
 cy.waitForReact();
 cy.react('ModalContainer').find('button').contains('Accept').click({force:true});
-//cy.wait(1000);
 cy.waitForReact();
 cy.react('ModalContainer').should('not.exist');
 });
 
 Cypress.Commands.add('submitSubscriberEmail', () => {
     cy.get('button').contains("Submit").click({force:true});
+    cy.waitForReact();
     })
 
 Cypress.Commands.add('checkSignupSuccessPage', () => {
@@ -45,14 +45,20 @@ Cypress.Commands.add('openPrivacyPolicyFromFooter', () => {
 })
 
 Cypress.Commands.add('openCompanyDetailsFromFooter', () => {
+    cy.react('FooterWrapper').find('a').contains('Company details')
+    .click();
     
 })
 
 Cypress.Commands.add('clickOnPrivacySettings', () => {
-    
+    cy.react('FooterWrapper').find('button').contains('Privacy settings')
+    .click();
+    cy.waitForReact();  
 })
 
+
 Cypress.Commands.add('checkCustomerSupportLink', () => {
-    
-})
+    cy.react('FooterWrapper').find('a').contains('Customer support')
+    .should('have.attr', 'href', 'mailto:hello@onedailynugget.com')
+    })
 

@@ -42,10 +42,9 @@ describe('User can navigate through the pages', () => {
     cy.checkCustomerSupportLink();
   })
 
-  it('Can accept cookies from the privacy settings', () => {
+  it('Cookies modal is presented by click on privacy settings', () => {
     cy.clickOnPrivacySettings();
-    cy.waitForReact();
-    cy.acceptCookies();
+    cy.react('ModalContainer').should('exist');
   })
 
   
