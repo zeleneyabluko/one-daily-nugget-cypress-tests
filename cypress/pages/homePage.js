@@ -19,25 +19,6 @@ export class HomePage {
         cy.get('#archiveButton').should('contain', 'View all past nuggets')
         .click({force:true});
         }
-    /*
-        openPrivacyPolicy() {
-        cy.get('a').contains(/privacy policy/i)
-    }
-
-    openCompanyDetails() {
-
-    }
-
-
-
-    openAboutPage() {
-
-    }
-
-    openArchive() {
-
-    }
-*/
 
 
     
