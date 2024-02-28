@@ -3,13 +3,6 @@ export class HomePage {
         cy.visit('/');
         }
 
-    typeEmail(email) {
-        cy.get("input[type='email']").type(email);
-    }
-
-    togglePrivacyPolicyCheckbox() {
-    }
-
     openRandomIssueView() {
         cy.waitForReact();
         cy.react('CardStyledLink').should('have.length', '3')
@@ -22,18 +15,20 @@ export class HomePage {
         cy.url().should('contain', 'issues');
         }
 
-    openPrivacyPolicy() {
+    viewAllPastNuggets() {
+        cy.get('#archiveButton').should('contain', 'View all past nuggets')
+        .click({force:true});
+        }
+    /*
+        openPrivacyPolicy() {
         cy.get('a').contains(/privacy policy/i)
-
     }
 
     openCompanyDetails() {
 
     }
 
-    viewAllPastNuggets() {
 
-    }
 
     openAboutPage() {
 
@@ -42,7 +37,7 @@ export class HomePage {
     openArchive() {
 
     }
-
+*/
 
 
     

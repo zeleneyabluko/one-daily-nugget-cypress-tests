@@ -14,6 +14,26 @@ describe('User can navigate through the pages', () => {
     cy.url().should('include', 'issues');
   });
 
+  it('User can open the About page', () => {
+    cy.openAboutPage();
+    cy.url().should('include', 'about');
+  });
+
+  it('Modal shows up when the user clicks on the Archive link in the header', () => {
+    cy.clickArchiveLinkInHeader();
+    cy.checkArchiveModal();
+  })
+
+  it('Modal shows up when the user clicks "View past nuggets"', () => {
+    const home = new HomePage();
+    home.viewAllPastNuggets();
+    cy.checkArchiveModal();
+  })
+
+  it('Can open the privacy policy from the footer', () => {
+    cy.openPrivacyPolicyFromFooter();
+  })
+
   
 
 })

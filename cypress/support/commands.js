@@ -1,5 +1,9 @@
 Cypress.Commands.add('acceptCookies', () => {
-cy.get('button').contains('Accept').click();
+cy.waitForReact();
+cy.react('ModalContainer').find('button').contains('Accept').click({force:true});
+//cy.wait(1000);
+cy.waitForReact();
+cy.react('ModalContainer').should('not.exist');
 });
 
 Cypress.Commands.add('submitSubscriberEmail', () => {
@@ -24,15 +28,31 @@ Cypress.Commands.add('openAboutPage', () => {
 })
 
 Cypress.Commands.add('clickArchiveLinkInHeader', () => {
-    cy.get('a').contains('Archive').click({force:true});
+    cy.waitForReact();
+    cy.react('StyledHeaderButton').contains('Archive').click({force:true});
 })
 
 Cypress.Commands.add('checkArchiveModal', () => {
+    cy.waitForReact();
     cy.react('ModalContent').should('be.visible');
+    cy.react('ModalContent').should('contain', 'If you are a subscriber already, please visit your email inbox and click on the “View archive” link at the bottom of any recent daily nugget.');
+    cy.react('ModalContent').should('contain', "If you are new to One Daily Nugget, sign up for free, and you'll get immediate access to our archive.");
 })
-/*TODO:
 
+Cypress.Commands.add('openPrivacyPolicyFromFooter', () => {
+    cy.react('FooterWrapper').find('a').contains('Privacy policy')
+    .click();
+})
 
-Archive (home page, issue view), 
-click logo to return home
-*/
+Cypress.Commands.add('openCompanyDetailsFromFooter', () => {
+    
+})
+
+Cypress.Commands.add('clickOnPrivacySettings', () => {
+    
+})
+
+Cypress.Commands.add('checkCustomerSupportLink', () => {
+    
+})
+

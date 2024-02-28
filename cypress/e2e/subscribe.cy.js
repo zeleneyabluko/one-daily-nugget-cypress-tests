@@ -42,6 +42,11 @@ describe('User subscribes to One Daily Nugget emails', () => {
     })
 
   it ('Can submit the email from the About page', () => {
+    cy.openAboutPage();
+    cy.typeSubscriberEmail(chance.email({domain: 'example.com'}));
+    cy.togglePrivacyPolicyCheckbox();
+    cy.submitSubscriberEmail();
+    cy.checkSignupSuccessPage();
 
   })
 
