@@ -7,7 +7,6 @@ Cypress.Commands.add('submitSubscriberEmail', () => {
     })
 
 Cypress.Commands.add('checkSignupSuccessPage', () => {
-    cy.waitForReact();
     cy.url().should('contain', '/signup-success');
 })
 

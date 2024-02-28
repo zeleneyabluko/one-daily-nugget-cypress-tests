@@ -11,6 +11,7 @@ export class HomePage {
     }
 
     openRandomIssueView() {
+        cy.waitForReact();
         cy.react('CardStyledLink').should('have.length', '3')
         .then(($issues) => {
           const items = $issues.toArray();
