@@ -8,12 +8,6 @@ export class HomePage {
     }
 
     togglePrivacyPolicyCheckbox() {
-        cy.get("input[type='checkbox']").click();
-    }
-
-    clickSubmit() {
-        cy.get('button').contains('Submit').click();
-        cy.wait(10000);
     }
 
     openRandomIssueView() {
@@ -24,6 +18,7 @@ export class HomePage {
           return items[random];  
         })
         .click();
+        cy.url().should('contain', 'issues');
         }
 
     openPrivacyPolicy() {
