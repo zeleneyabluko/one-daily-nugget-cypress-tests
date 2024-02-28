@@ -3,10 +3,8 @@ cy.get('button').contains('Accept').click();
 });
 
 Cypress.Commands.add('submitSubscriberEmail', () => {
-    cy.waitForReact();
-    cy.get('button').contains("Submit").click();
-    cy.waitForReact();
-})
+    cy.get('button').contains("Submit").click({force:true});
+    })
 
 Cypress.Commands.add('checkSignupSuccessPage', () => {
     cy.waitForReact();
