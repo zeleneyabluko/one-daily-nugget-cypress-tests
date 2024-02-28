@@ -13,6 +13,7 @@ export class HomePage {
 
     clickSubmit() {
         cy.get('button').contains('Submit').click();
+        cy.wait(10000);
     }
 
     openRandomIssueView() {
