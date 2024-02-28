@@ -34,6 +34,20 @@ describe('User can navigate through the pages', () => {
     cy.openPrivacyPolicyFromFooter();
   })
 
+  it('Can open the company details from the footer', () => {
+    cy.openCompanyDetailsFromFooter();
+  })
+
+  it('Customer support link is available', () => {
+    cy.checkCustomerSupportLink();
+  })
+
+  it('Can accept cookies from the privacy settings', () => {
+    cy.clickOnPrivacySettings();
+    cy.waitForReact();
+    cy.acceptCookies();
+  })
+
   
 
 })
