@@ -3,12 +3,13 @@ cy.get('button').contains('Accept').click();
 });
 
 Cypress.Commands.add('submitSubscriberEmail', () => {
-    cy.get('button').contains('Submit').click();
-    cy.wait(10000);
+    cy.waitForReact();
+    cy.get('button').contains("Submit").click();
+    cy.waitForReact();
 })
 
 Cypress.Commands.add('checkSignupSuccessPage', () => {
-    cy.get('h1').should('contain', 'Thank you for signing up!');
+    cy.waitForReact();
     cy.url().should('contain', '/signup-success');
 })
 

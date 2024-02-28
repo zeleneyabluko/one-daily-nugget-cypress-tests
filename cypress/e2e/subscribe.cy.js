@@ -3,7 +3,7 @@ import Chance from "chance"
 
 describe('User subscribes to One Daily Nugget emails', () => {
   beforeEach(() => {
-     cy.visit('/');
+    cy.visit('/');
     cy.acceptCookies();
   })
   
