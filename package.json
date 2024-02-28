@@ -13,6 +13,7 @@
     "cypress-react-selector": "^3.0.0"
   },
   "dependencies": {
-    "chance": "^1.1.11"
+    "chance": "^1.1.11",
+    "mailslurp-client": "^15.17.5"
   }
 }
