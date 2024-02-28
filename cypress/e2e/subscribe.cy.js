@@ -41,8 +41,18 @@ describe('User subscribes to One Daily Nugget emails', () => {
     //cy.get('h1').should('contain', 'Thank you for signing up!');
     })
 
-  it ('Can submit the email from the About page', () => {
+  it ('Can submit the email from the bottom of the About page', () => {
     cy.openAboutPage();
+    cy.typeSubscriberEmail(chance.email({domain: 'example.com'}));
+    cy.togglePrivacyPolicyCheckbox();
+    cy.submitSubscriberEmail();
+    cy.checkSignupSuccessPage();
+
+  })
+
+  it ('Can submit the email after clicking "Sign up" on the About page', () => {
+    cy.openAboutPage();
+    cy.get('button').contains('Sign up').click();
     cy.typeSubscriberEmail(chance.email({domain: 'example.com'}));
     cy.togglePrivacyPolicyCheckbox();
     cy.submitSubscriberEmail();
