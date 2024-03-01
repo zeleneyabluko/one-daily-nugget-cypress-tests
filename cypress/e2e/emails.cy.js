@@ -1,9 +1,8 @@
 import Chance from "chance";
 import Mailslurp from 'cypress-mailslurp';
-import { WaitForLatestEmailSortEnum } from "mailslurp-client";
 
 before(() => {
-    
+     
     cy.mailslurp()
     .then(function(mailslurp){
         cy.wrap(mailslurp).as('mailslurp')
@@ -13,7 +12,10 @@ before(() => {
     .then(inbox => {
         cy.wrap(inbox).its('id').as('inboxId');
         cy.wrap(inbox).its('emailAddress').as('emailAddress');
-        });
+        }); 
+    
+    
+   
     cy.visit('/');
     cy.waitForReact(1000, '#__next'); 
     cy.acceptCookies();
@@ -22,62 +24,58 @@ before(() => {
 
 describe('User receives confirmation and welcome emails', () => {
 
-  it ('User receives the confirmation email upon registration', () => {
+  it ('Can confirm the email after the registration and receives the welcome email', () => {
 
    cy.get('@emailAddress')
    .then(emailAddress => cy.typeSubscriberEmail(emailAddress));
+ 
+   
 
    cy.togglePrivacyPolicyCheckbox();
-   //cy.submitSubscriberEmail();
-   //cy.checkSignupSuccessPage();
+   cy.submitSubscriberEmail();
+   cy.checkSignupSuccessPage();
 
     cy.mailslurp()
     .then (function(mailslurp){
-        mailslurp.waitController.waitForMatchingFirstEmail({
-            inboxId: this.inboxId, 
-            timeout: 60000, 
-            unread_only: true,
-            matchOptions: {
-                matches: [
-                    {
-
-                    },
-
-                ],
-
-        },
+               
+        return mailslurp.waitForLatestEmail(this.inboxId, 30000);
     })
+    .then (confirmationEmail => {
+        assert.isDefined(confirmationEmail);
+        
+        cy.wrap(confirmationEmail).its('body').as('confirmationEmailBody');
+        cy.get('@confirmationEmailBody')
+    .then(function(){
+    assert.include(this.confirmationEmailBody, 'Confirm subscription');
+    const txt = this.confirmationEmailBody;
+    const linkRegex = /https:\/\/e\.onedailynugget\.com\/webforms\/confirm\/[^\s'"]+/g;
+    const extractedLinks = txt.match(linkRegex);
+    cy.visit(extractedLinks[0]);
+    cy.url().should('eq', 'https://onedailynugget.com/email-confirmation');
+
+    cy.mailslurp()
+    .then(function (mailslurp) {
+        return mailslurp.waitForLatestEmail(this.inboxId, 30000);
     })
+    .then (welcomeEmail => {
+        assert.isDefined(welcomeEmail);
+        console.log(welcomeEmail);
+        cy.wrap(welcomeEmail).its('subject').as('welcomeEmailSubject');
+        assert.equal(this.welcomeEmailSubject, 'Welcome to the One Daily Nugget Community');
+       //this is incorrect, need to find the way to extract the subject from the welcomeEmail
+    })
+    });    
 
+  })
+  })
 
+  it ('Can view past nuggets after confirming the email', () => {
+      cy.visit('https://onedailynugget.com/email-confirmation');
+      cy.viewAllPastNuggets();
 
-   
-
-
-
-
-
-
-
-    
-   
-   
-
+      //need to fix this test, it doesn't click on the button
+  })
 
   
-    
-   
-  
-      
-
-  })
-
-  it ('When the user clicks on the confirmation link, the confirmation page is presented', () => {
-    // https://onedailynugget.com/email-confirmation
-  })
-
-  it ('User receives the welcome email after confirming the email address', () => {
-    
-  })
 
 })
