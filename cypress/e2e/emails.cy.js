@@ -1,10 +1,19 @@
 import Chance from "chance";
 import Mailslurp from 'cypress-mailslurp';
+import { WaitForLatestEmailSortEnum } from "mailslurp-client";
 
 before(() => {
-    //const apiKey = 'fc15634ba596d29067409244c7ebed77de4cffdab60ba1ca449c088ace31275c';
-    //cy.wrap(apiKey).as('apiKey');
     
+    cy.mailslurp()
+    .then(function(mailslurp){
+        cy.wrap(mailslurp).as('mailslurp')
+        return mailslurp.createInbox();
+
+    })
+    .then(inbox => {
+        cy.wrap(inbox).its('id').as('inboxId');
+        cy.wrap(inbox).its('emailAddress').as('emailAddress');
+        });
     cy.visit('/');
     cy.waitForReact(1000, '#__next'); 
     cy.acceptCookies();
@@ -14,27 +23,47 @@ before(() => {
 describe('User receives confirmation and welcome emails', () => {
 
   it ('User receives the confirmation email upon registration', () => {
+
+   cy.get('@emailAddress')
+   .then(emailAddress => cy.typeSubscriberEmail(emailAddress));
+
+   cy.togglePrivacyPolicyCheckbox();
+    //cy.submitSubscriberEmail();
+    //cy.checkSignupSuccessPage();
+
     cy.mailslurp()
-    .then(mailslurp => mailslurp.createInbox())
-    .then(inbox => {
-        cy.wrap(inbox).its('id').as('inboxId');
-        cy.wrap(inbox).its('emailAddress').as('emailAddress');
-        });
-    cy.get('@emailAddress').then((email) => cy.typeSubscriberEmail(email));
-    cy.togglePrivacyPolicyCheckbox();
-        //cy.submitSubscriberEmail();
-        //cy.checkSignupSuccessPage(); 
+    .then (function(mailslurp){
+        mailslurp.waitForLatestEmail(this.inboxId, 60000, true)
+    })
+    .then (confirmationEmail => cy.wrap(confirmationEmail).as('confirmationEmail'));
+
+    cy.mailslurp()
+    .then (function(mailslurp){
+        mailslurp.emailController.getEmailContentMatch({
+            emailId: this.confirmationEmail,
+            contentMatchOptions: {
+                // regex pattern to extract verification code
+                pattern: 'Your Demo verification code is ([0-9]{6})'
+            }
+        })
+    })
+    .then 
+
+
+
+
+
+
+
     
    
-   /* cy.get('@emailAddress').then((email) => cy.typeSubscriberEmail(email));
-    cy.togglePrivacyPolicyCheckbox();
-    //cy.submitSubscriberEmail();
-    //cy.checkSignupSuccessPage(); 
-    cy.get('@apiKey')
-    .then(apiKey => cy.mailslurp({ apiKey: apiKey }))
-    .then(mailslurp => mailslurp.waitForLatestEmail(inboxId, 60000, true))
-    */
+   
+
+
+  
     
+   
+  
       
 
   })
