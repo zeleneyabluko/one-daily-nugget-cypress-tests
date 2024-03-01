@@ -28,26 +28,30 @@ describe('User receives confirmation and welcome emails', () => {
    .then(emailAddress => cy.typeSubscriberEmail(emailAddress));
 
    cy.togglePrivacyPolicyCheckbox();
-    //cy.submitSubscriberEmail();
-    //cy.checkSignupSuccessPage();
+   //cy.submitSubscriberEmail();
+   //cy.checkSignupSuccessPage();
 
     cy.mailslurp()
     .then (function(mailslurp){
-        mailslurp.waitForLatestEmail(this.inboxId, 60000, true)
-    })
-    .then (confirmationEmail => cy.wrap(confirmationEmail).as('confirmationEmail'));
+        mailslurp.waitController.waitForMatchingFirstEmail({
+            inboxId: this.inboxId, 
+            timeout: 60000, 
+            unread_only: true,
+            matchOptions: {
+                matches: [
+                    {
 
-    cy.mailslurp()
-    .then (function(mailslurp){
-        mailslurp.emailController.getEmailContentMatch({
-            emailId: this.confirmationEmail,
-            contentMatchOptions: {
-                // regex pattern to extract verification code
-                pattern: 'Your Demo verification code is ([0-9]{6})'
-            }
-        })
+                    },
+
+                ],
+
+        },
     })
-    .then 
+    })
+
+
+
+   
 
 
 
