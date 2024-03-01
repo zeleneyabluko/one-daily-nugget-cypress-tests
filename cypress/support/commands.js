@@ -62,3 +62,17 @@ Cypress.Commands.add('checkCustomerSupportLink', () => {
     .should('have.attr', 'href', 'mailto:hello@onedailynugget.com')
     })
 
+    
+
+Cypress.Commands.add('openRandomIssueView', () => {
+    cy.waitForReact();
+        cy.react('CardStyledLink')
+        .then(($issues) => {
+          const items = $issues.toArray();
+          const random = Math.floor(Math.random() * $issues.length); 
+          return items[random];
+        })
+        .click();
+        cy.url().should('contain', 'issues');
+})
+

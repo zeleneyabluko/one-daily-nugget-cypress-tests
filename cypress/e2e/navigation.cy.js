@@ -9,8 +9,7 @@ describe('User can navigate through the pages', () => {
   
 
   it('User can open an issue view', () => {
-    const home = new HomePage();
-    home.openRandomIssueView();
+    cy.openRandomIssueView();
     cy.url().should('include', 'issues');
   });
 
