@@ -1,5 +1,5 @@
 export class ArchivePage {
-    visit() {
+    open() {
         cy.visit('/onedailynugget.com/archive/p5pq876mzv');
         }
     
