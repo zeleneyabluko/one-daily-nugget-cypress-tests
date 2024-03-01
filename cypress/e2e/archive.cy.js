@@ -1,5 +1,3 @@
-import { ArchivePage } from "../pages/homePage"
-import Chance from "chance"
 
 describe('User can read the items in the archive', () => {
   beforeEach(() => {

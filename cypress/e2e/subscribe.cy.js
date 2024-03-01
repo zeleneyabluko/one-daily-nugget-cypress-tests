@@ -1,4 +1,3 @@
-import { HomePage } from "../pages/homePage"
 import Chance from "chance"
 
 describe('User subscribes to One Daily Nugget emails', () => {

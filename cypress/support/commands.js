@@ -76,3 +76,8 @@ Cypress.Commands.add('openRandomIssueView', () => {
         cy.url().should('contain', 'issues');
 })
 
+Cypress.Commands.add('viewAllPastNuggets', () => {
+    cy.get('#archiveButton').should('contain', 'View all past nuggets')
+        .click({force:true});
+})
+
