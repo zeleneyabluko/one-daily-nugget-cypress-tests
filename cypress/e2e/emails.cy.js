@@ -55,13 +55,19 @@ describe('User receives confirmation and welcome emails', () => {
 
     cy.mailslurp()
     .then(function (mailslurp) {
-        return mailslurp.waitForLatestEmail(this.inboxId, 30000);
+        return mailslurp.waitForLatestEmail(this.inboxId, 30000, true);
     })
-    .then (welcomeEmail => {
+    .then (function(welcomeEmail)  {
+        console.log(welcomeEmail);
         assert.isDefined(welcomeEmail);
         console.log(welcomeEmail);
-        cy.wrap(welcomeEmail).its('subject').as('welcomeEmailSubject');
-        assert.equal(this.welcomeEmailSubject, 'Welcome to the One Daily Nugget Community');
+        cy.wrap(welcomeEmail).its('subject').as('welcomeSubject');
+        cy.get('@welcomeSubject')
+        .then(function(){
+            assert.equal(this.welcomeSubject, 'Welcome to the One Daily Nugget Community')
+
+        })
+        
        //this is incorrect, need to find the way to extract the subject from the welcomeEmail
     })
     });    

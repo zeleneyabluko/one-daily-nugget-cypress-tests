@@ -1,3 +1,5 @@
+import MailSlurp from "mailslurp-client";
+
 Cypress.Commands.add('acceptCookies', () => {
 cy.waitForReact();
 cy.react('ModalContainer').find('button').contains('Accept').click({force:true});
@@ -77,7 +79,8 @@ Cypress.Commands.add('openRandomIssueView', () => {
 })
 
 Cypress.Commands.add('viewAllPastNuggets', () => {
-    cy.get('#archiveButton').should('contain', 'View all past nuggets')
+    cy.get('button').should('contain', 'View all past nuggets')
         .click({force:true});
 })
+
 

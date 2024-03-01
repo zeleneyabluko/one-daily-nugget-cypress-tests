@@ -9,7 +9,7 @@ module.exports = defineConfig({
   },
   
     "env": {
-      "MAILSLURP_API_KEY": 'fc15634ba596d29067409244c7ebed77de4cffdab60ba1ca449c088ace31275c'
+      "MAILSLURP_API_KEY": '81281cbe5e9013af98a3c58adfd877e1be598535ea13c1ff027c7f4e89ed7d78'
     }
   
 }); 
