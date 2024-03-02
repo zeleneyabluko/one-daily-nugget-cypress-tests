@@ -79,7 +79,7 @@ Cypress.Commands.add('openRandomIssueView', () => {
 })
 
 Cypress.Commands.add('viewAllPastNuggets', () => {
-    cy.get('button').should('contain', 'View all past nuggets')
+    cy.get('button').contains(/View\s(?:all\s)?past\snuggets/)
         .click({force:true});
 })
 
