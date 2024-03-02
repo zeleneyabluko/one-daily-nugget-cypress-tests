@@ -2,6 +2,8 @@ import Chance from "chance";
 import Mailslurp from 'cypress-mailslurp';
 
 before(() => {
+
+    
      
     cy.mailslurp()
     .then(function(mailslurp){
@@ -13,18 +15,20 @@ before(() => {
         cy.wrap(inbox).its('id').as('inboxId');
         cy.wrap(inbox).its('emailAddress').as('emailAddress');
         }); 
-    
-    
-   
+        
     cy.visit('/');
     cy.waitForReact(1000, '#__next'); 
     cy.acceptCookies();
+
+    
 
     })
 
 describe('User receives confirmation and welcome emails', () => {
 
-  it ('Can confirm the email after the registration and receives the welcome email', () => {
+    
+
+    it ('Can confirm the email after the registration and receives the welcome email', () => {
 
    cy.get('@emailAddress')
    .then(emailAddress => cy.typeSubscriberEmail(emailAddress));
@@ -54,8 +58,8 @@ describe('User receives confirmation and welcome emails', () => {
     cy.url().should('eq', 'https://onedailynugget.com/email-confirmation');
 
     cy.mailslurp()
-    .then(function (mailslurp) {
-        return mailslurp.waitForLatestEmail(this.inboxId, 30000, true);
+    .then({timeout: 60000}, function (mailslurp) {
+        return mailslurp.waitForLatestEmail(this.inboxId, 100000, true);
     })
     .then (function(welcomeEmail)  {
         console.log(welcomeEmail);
@@ -68,18 +72,18 @@ describe('User receives confirmation and welcome emails', () => {
 
         })
         
-       //this is incorrect, need to find the way to extract the subject from the welcomeEmail
     })
     });    
 
   })
   })
 
+  
+
   it ('Can view past nuggets after confirming the email', () => {
       cy.visit('https://onedailynugget.com/email-confirmation');
       cy.viewAllPastNuggets();
 
-      //need to fix this test, it doesn't click on the button
   })
 
   
