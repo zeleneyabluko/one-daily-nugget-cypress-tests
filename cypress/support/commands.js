@@ -1,3 +1,5 @@
+import MailSlurp from "mailslurp-client";
+
 Cypress.Commands.add('acceptCookies', () => {
 cy.waitForReact();
 cy.react('ModalContainer').find('button').contains('Accept').click({force:true});
@@ -61,4 +63,24 @@ Cypress.Commands.add('checkCustomerSupportLink', () => {
     cy.react('FooterWrapper').find('a').contains('Customer support')
     .should('have.attr', 'href', 'mailto:hello@onedailynugget.com')
     })
+
+    
+
+Cypress.Commands.add('openRandomIssueView', () => {
+    cy.waitForReact();
+        cy.react('CardStyledLink')
+        .then(($issues) => {
+          const items = $issues.toArray();
+          const random = Math.floor(Math.random() * $issues.length); 
+          return items[random];
+        })
+        .click();
+        cy.url().should('contain', 'issues');
+})
+
+Cypress.Commands.add('viewAllPastNuggets', () => {
+    cy.get('button').contains(/View\s(?:all\s)?past\snuggets/)
+        .click({force:true});
+})
+
 

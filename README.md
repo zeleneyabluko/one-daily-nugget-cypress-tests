@@ -1,2 +1,4 @@
 # one-daily-nugget-cypress-tests
-Cypress tests for One Daily Nugget website.
+The project contains a set of Cypress tests for the [One Daily Nugget](https://onedailynugget.com/) web site.
+
+
