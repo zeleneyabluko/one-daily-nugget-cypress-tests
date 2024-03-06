@@ -1,0 +1,24 @@
+name: Run Cypress Tests Weekly
+
+on:
+  schedule:
+    - cron: '12 30 * * 3' # Run every Sunday at midnight (UTC)
+
+jobs:
+  cypress:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 14
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run Cypress tests
+      run: npm run cypress:run
