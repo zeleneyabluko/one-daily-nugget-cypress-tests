@@ -2,7 +2,7 @@ name: Run Cypress Tests Weekly
 
 on:
   schedule:
-    - cron: '12 30 * * 3' # Run every Sunday at midnight (UTC)
+    - cron: '30 12 * * 3' # Run every Sunday at midnight (UTC)
 
 jobs:
   cypress:
