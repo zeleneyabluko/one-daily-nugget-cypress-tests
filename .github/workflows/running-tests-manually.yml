@@ -2,11 +2,7 @@ name: Run Cypress Tests Manually
 
 on:
   workflow_dispatch:
-    inputs:
-      environment:
-        description: 'Environment to run tests on'
-        required: true
-        default: 'staging' # Change default value as needed
+   
 
 jobs:
   cypress:
@@ -19,10 +15,10 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: 14
+        node-version: 20
 
     - name: Install dependencies
       run: npm install
 
     - name: Run Cypress tests
-      run: npm run cypress:run --env ${{ github.event.inputs.environment }}
+      run: npm run cypress
