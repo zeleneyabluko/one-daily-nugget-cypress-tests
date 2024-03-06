@@ -1,6 +1,7 @@
-name: Cypress Tests
+name: Run Cypress Tests Manually
 
-on:
+
+on: workflow_dispatch
 
 jobs:
   cypress-run:
